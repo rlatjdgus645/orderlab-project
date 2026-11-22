@@ -26,3 +26,13 @@ def test_final_total_free_shipping_boundary():
 
 def test_final_total_above_free_shipping():
     assert final_total(50_001, 1, 0) == 50_001
+
+
+def test_discount_below_zero():
+    with pytest.raises(ValueError):
+        final_total(10_000, 2, -1)
+
+
+def test_discount_over_100():
+    with pytest.raises(ValueError, match="invalid discount"):
+        final_total(10_000, 2, 101)
