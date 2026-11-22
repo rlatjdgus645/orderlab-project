@@ -25,3 +25,7 @@ def test_csv_invalid_number(tmp_path):
     csv_file.write_text("price,quantity\nabc,2\n", encoding="utf-8")
     with pytest.raises(ValueError):
         revenue_from_csv(csv_file)
+
+
+def test_fixture_revenue(sample_csv):
+    assert revenue_from_csv(sample_csv) == 35_000
